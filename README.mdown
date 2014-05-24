@@ -1,0 +1,3 @@
+## Audio A-Law converter
+
+Takes wma encoded files as input and converts them to A-Law wave files with a background loop mixed in (unless the filename contains "-msg", "msg-" or "message-").
