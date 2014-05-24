@@ -1,0 +1,36 @@
+html
+  head
+    meta charset="utf-8"
+    title Conversion de fichiers audio
+    link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css"
+    css:
+      body {
+        padding-top: 20px;
+      }
+      input[type=file] {
+        padding: 50px;
+        margin: auto;
+        max-width: 90%;
+      }
+  body
+    .container
+      .jumbotron.text-center
+        h1 Conversion de fichiers audio
+        - if @message
+          p.alert.alert-success= @message
+        hr
+        .row
+          .col-md-6
+            form action="upload" method="post" enctype="multipart/form-data"
+              .form-group
+                input.btn.btn-success type="file" multiple="multiple" name="files[]"
+              .form-group
+                input.btn.btn-primary type="submit" value="Convertir"
+          .col-md-6
+            - if @files.any?
+              ul.list-group
+                - @files.each do |file|
+                  li.list-group-item
+                    a href="/download/#{file}" = file
+              form action="/clear" method="post"
+                input.btn.btn-danger type="submit" value="Effacer"
