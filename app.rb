@@ -37,7 +37,7 @@ class AudioConversion
     logger.info "Start conversion"
     Dir["uploads/*"].each do |file|
       logger.info "File : #{file}"
-      %x(mplayer -vo null -vc null -af resample=44100 -ao pcm:waveheader #{file})
+      %x(mplayer -vo null -vc null -af resample=8000 -ao pcm:waveheader #{file})
       new_file = file.gsub('.wma', '.wav')
       next if File.exists? new_file
       %x(mv audiodump.wav #{file})
@@ -46,7 +46,7 @@ class AudioConversion
         length = %x(sox "#{file}" -n stat 2>&1 | grep Length | ruby -e "puts ARGF.gets.split.last")
         length = length.to_f.ceil
         logger.info "Mix with background"
-        %x(sox -m -v 0.2 "#{File.dirname(__FILE__)}/loop-background.mp3" -v 1 "#{file}" "#{new_file}")
+        %x(sox -m -v 0.2 "#{File.dirname(__FILE__)}/loop-background.wav" -v 1 "#{file}" "#{new_file}")
         logger.info "Trim mix"
         %x(sox "#{new_file}" "#{new_file.gsub('.wav', '_short.wav')}" trim 0 #{length})
         logger.info "Convert to A-law"
