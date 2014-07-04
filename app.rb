@@ -41,7 +41,7 @@ class AudioConversion
       new_file = file.gsub('.wma', '.wav')
       next if File.exists? new_file
       %x(mv audiodump.wav #{file})
-      unless ARGV[1] == 'no_background' || file['-msg'] || file['message-'] || file['msg-']
+      unless ARGV[1] == 'no_background' || file['-msg'] || file['message-'] || file['msg-'] || file['sansmusique']
         logger.info "Get file length"
         length = %x(sox "#{file}" -n stat 2>&1 | grep Length | ruby -e "puts ARGF.gets.split.last")
         length = length.to_f.ceil
