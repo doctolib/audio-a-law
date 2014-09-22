@@ -22,7 +22,7 @@ end
 post '/generate' do
   %w(msg predecroche repondeur).each do |part|
     filename = "uploads/#{params['filename']}-#{part}.wav"
-    %x(say -v Audrey -o "#{filename}" --data-format=LEF32@8000 #{params[part]})
+    %x(say -v Audrey -r 210 -o "#{filename}" --data-format=LEF32@8000 #{params[part]})
     # audio_conversion.add_background_music filename if params['add_background']
     audio_conversion.convert_to_a_law filename
   end
