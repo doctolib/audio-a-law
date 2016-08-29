@@ -3,3 +3,4 @@
 Sinatra application that takes WMA encoded files as input and converts them to A-Law WAV files with a background loop mixed in (unless the filename contains "-msg", "msg-" or "message-").
 
 Depends on SoX and mplayer system packages (easily installed with Homebrew on a Mac OS X).
+Also depends on the Mac OS X system voice 'Audrey' (installable through System Preferences / Text to Speech).
